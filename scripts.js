@@ -165,6 +165,4 @@ runButton.addEventListener("click", () => {
 
   // Re-highlight the syntax in the output using Prism.js
   Prism.highlightAll();
-});
-_______
-Allows that everything same but have a new command "<comment><type whatever></comment>" 
+}); 
