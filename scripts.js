@@ -1,40 +1,3 @@
-const imageUpload = document.getElementById("imageUpload");
-const fileDetails = document.getElementById("fileDetails");
-const outputDiv = document.getElementById("output");
-const runButton = document.getElementById("runCode");
-
-// Initialize CodeMirror for syntax highlighting in the textarea
-const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
-  mode: "htmlmixed",
-  lineNumbers: true,
-  matchBrackets: true,
-  theme: "dracula",
-  lineWrapping: true,
-});
-
-// Load custom tags from localStorage
-const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
-
-// Save custom tags to localStorage
-function saveCustomTags() {
-  localStorage.setItem("customTags", JSON.stringify(customTags));
-}
-
-// Handle Image Upload
-imageUpload.addEventListener("change", (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const fileURL = URL.createObjectURL(file);
-    const fileExtension = file.name.split('.').pop();
-    fileDetails.textContent = `File: ${file.name} (Extension: ${fileExtension})`;
-
-    // Add HTML++ Syntax Example in Editor
-    codeArea.setValue(codeArea.getValue() + `<lazyload>${fileURL}</lazyload>\n`);
-  } else {
-    fileDetails.textContent = "No file selected.";
-  }
-});
-
 // Parse and Run HTML++ Code
 runButton.addEventListener("click", () => {
   let htmlCode = codeArea.getValue();
@@ -157,6 +120,14 @@ runButton.addEventListener("click", () => {
     /<formElement type="(.*?)" name="(.*?)" placeholder="(.*?)"><\/formElement>/g,
     (match, type, name, placeholder) => {
       return `<input type="${type}" name="${name}" placeholder="${placeholder}">`;
+    }
+  );
+
+  // <comment> (New Command for Comments)
+  htmlCode = htmlCode.replace(
+    /<comment><type (.*?)><\/comment>/g,
+    (match, commentContent) => {
+      return `<!-- ${commentContent} -->`;
     }
   );
 
