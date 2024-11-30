@@ -12,6 +12,14 @@ const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineWrapping: true, // Enable line wrapping
 });
 
+// Load custom tags from localStorage
+const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
+
+// Save custom tags to localStorage
+function saveCustomTags() {
+  localStorage.setItem("customTags", JSON.stringify(customTags));
+}
+
 // Handle Image Upload
 imageUpload.addEventListener("change", (event) => {
   const file = event.target.files[0];
@@ -44,6 +52,21 @@ runButton.addEventListener("click", () => {
       return `<pre><code class="language-${language}">${escapedCode}</code></pre>`;
     }
   );
+
+  // Command Parsing: Create Custom Tag
+  htmlCode = htmlCode.replace(
+    /<create>name="(.*?)" js:(.*?)<\/create>/gs,
+    (match, tagName, realHTML) => {
+      customTags[tagName] = realHTML;
+      saveCustomTags();
+      return `<p>Custom tag <strong>${tagName}</strong> created!</p>`;
+    }
+  );
+
+  // Command Parsing: Import Custom Tag
+  htmlCode = htmlCode.replace(/<import>(.*?)<\/import>/g, (match, tagName) => {
+    return customTags[tagName] || `<p>Error: Custom tag <strong>${tagName}</strong> not found!</p>`;
+  });
 
   // Render the Parsed HTML
   outputDiv.innerHTML = htmlCode;
