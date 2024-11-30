@@ -106,6 +106,18 @@ runButton.addEventListener("click", () => {
     return `<input ${attributes}>`;
   });
 
+  // New: Include Library Command
+  htmlCode = htmlCode.replace(/<library>(.*?)<\/library>/g, (match, link) => {
+    return `<script src="${link.trim()}"></script>`;
+  });
+
+  // New: Lazyload Command
+  htmlCode = htmlCode.replace(/<lazyload>(.*?)<\/lazyload>/g, (match, attributes) => {
+    const srcMatch = attributes.match(/src="(.*?)"/);
+    const src = srcMatch ? srcMatch[1] : "";
+    return `<img data-src="${src}" class="lazyload">`;
+  });
+
   // Render the Parsed HTML
   outputDiv.innerHTML = htmlCode;
 });
