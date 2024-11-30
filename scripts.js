@@ -1,10 +1,18 @@
 const imageUpload = document.getElementById("imageUpload");
 const fileDetails = document.getElementById("fileDetails");
-const codeArea = document.getElementById("code");
 const outputDiv = document.getElementById("output");
 const runButton = document.getElementById("runCode");
 
 let uploadedFileURL = "";
+
+// Initialize CodeMirror for syntax highlighting in the textarea
+const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
+  mode: "htmlmixed",        // Use 'htmlmixed' mode for HTML, CSS, JS highlighting
+  lineNumbers: true,       // Show line numbers
+  matchBrackets: true,     // Highlight matching brackets
+  theme: "dracula",        // Optional: Apply the 'dracula' theme (or choose another)
+  lineWrapping: true       // Enable line wrapping
+});
 
 // Handle Image Upload
 imageUpload.addEventListener("change", (event) => {
@@ -16,7 +24,7 @@ imageUpload.addEventListener("change", (event) => {
     fileDetails.textContent = `File: ${file.name} (Extension: ${fileExtension})`;
 
     // Add HTML++ Syntax Example in Editor
-    codeArea.value += `<img>${fileExtension} src="${fileURL}" alt="Uploaded Image"</img>\n`;
+    codeArea.setValue(codeArea.getValue() + `<img>${fileExtension} src="${fileURL}" alt="Uploaded Image"</img>\n`);
   } else {
     fileDetails.textContent = "No file selected.";
   }
@@ -24,7 +32,7 @@ imageUpload.addEventListener("change", (event) => {
 
 // Parse and Run HTML++ Code
 runButton.addEventListener("click", () => {
-  let htmlCode = codeArea.value;
+  let htmlCode = codeArea.getValue();
 
   // Command Parsing: Replace Custom Tags with Standard HTML
   htmlCode = htmlCode.replace(/<img>(.*?)<\/img>/g, (match, attributes) => {
