@@ -1,4 +1,3 @@
-
 const imageUpload = document.getElementById("imageUpload");
 const fileDetails = document.getElementById("fileDetails");
 const outputDiv = document.getElementById("output");
@@ -32,11 +31,23 @@ imageUpload.addEventListener("change", (event) => {
 runButton.addEventListener("click", () => {
   let htmlCode = codeArea.getValue();
 
-  // Command Parsing: Replace Lazyload Tag
+  // Command Parsing: Replace <lazyload>
   htmlCode = htmlCode.replace(/<lazyload>(.*?)<\/lazyload>/g, (match, src) => {
     return `<img src="${src}" loading="lazy" alt="Lazy Loaded Image">`;
   });
 
+  // Command Parsing: Replace <highlight>
+  htmlCode = htmlCode.replace(
+    /<highlight language="(.*?)">(.*?)<\/highlight>/gs,
+    (match, language, code) => {
+      const escapedCode = code.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return `<pre><code class="language-${language}">${escapedCode}</code></pre>`;
+    }
+  );
+
   // Render the Parsed HTML
   outputDiv.innerHTML = htmlCode;
+
+  // Re-highlight the syntax in the output using Prism.js
+  Prism.highlightAll();
 });
