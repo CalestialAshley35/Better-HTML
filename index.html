@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML++ Editor</title>
+  
+  <!-- CodeMirror CSS (For syntax highlighting) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+  <!-- CodeMirror Theme (Optional, for styling) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,7 +22,7 @@
     <p id="fileDetails">No file selected.</p>
   </div>
 
-  <!-- Code Editor -->
+  <!-- Code Editor Section -->
   <div class="editor">
     <textarea id="code" placeholder="Write your HTML++ or HTML code here..."></textarea>
     <button id="runCode">Run Code</button>
@@ -25,6 +31,11 @@
   <!-- Output Section -->
   <div class="output" id="output"></div>
 
+  <!-- CodeMirror JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/matchbrackets.min.js"></script>
+  
   <script src="scripts.js"></script>
 </body>
-</html>
+  </html>
