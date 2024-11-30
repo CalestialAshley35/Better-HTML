@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML++ Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>HTML++ Editor</h1>
+  <p>Write HTML++ or standard HTML code, upload images, and see the results live.</p>
+
+  <!-- Image Upload Section -->
+  <div>
+    <input type="file" id="imageUpload" accept="image/*">
+    <p id="fileDetails">No file selected.</p>
+  </div>
+
+  <!-- Code Editor -->
+  <div class="editor">
+    <textarea id="code" placeholder="Write your HTML++ or HTML code here..."></textarea>
+    <button id="runCode">Run Code</button>
+  </div>
+
+  <!-- Output Section -->
+  <div class="output" id="output"></div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
