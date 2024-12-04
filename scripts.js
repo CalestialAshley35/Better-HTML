@@ -12,12 +12,18 @@ const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineWrapping: true,
 });
 
-// Load custom tags from localStorage
+// Load custom tags and modules from localStorage
 const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
+const eshModules = JSON.parse(localStorage.getItem("eshModules")) || {};
 
 // Save custom tags to localStorage
 function saveCustomTags() {
   localStorage.setItem("customTags", JSON.stringify(customTags));
+}
+
+// Save eshModules to localStorage
+function saveEshModules() {
+  localStorage.setItem("eshModules", JSON.stringify(eshModules));
 }
 
 // Handle Image Upload
@@ -69,6 +75,27 @@ runButton.addEventListener("click", () => {
   htmlCode = htmlCode.replace(/<import>(.*?)<\/import>/g, (match, tagName) => {
     return customTags[tagName] || `<p>Error: Custom tag <strong>${tagName}</strong> not found!</p>`;
   });
+
+  // New Command: esh create
+  htmlCode = htmlCode.replace(
+    /esh create (\w+)\s*html:(.*?)$/gm,
+    (match, moduleName, moduleHTML) => {
+      eshModules[moduleName] = moduleHTML.trim();
+      saveEshModules();
+      return `<p>Module <strong>${moduleName}</strong> created! Use by <code>esh install ${moduleName}</code>.</p>`;
+    }
+  );
+
+  // New Command: esh install
+  htmlCode = htmlCode.replace(
+    /esh install (\w+)/g,
+    (match, moduleName) => {
+      return (
+        eshModules[moduleName] ||
+        `<p>Error: Module <strong>${moduleName}</strong> not found!</p>`
+      );
+    }
+  );
 
   // <videoEmbed>
   htmlCode = htmlCode.replace(
@@ -165,4 +192,4 @@ runButton.addEventListener("click", () => {
 
   // Re-highlight the syntax in the output using Prism.js
   Prism.highlightAll();
-}); 
+});
