@@ -2,6 +2,7 @@ const imageUpload = document.getElementById("imageUpload");
 const fileDetails = document.getElementById("fileDetails");
 const outputDiv = document.getElementById("output");
 const runButton = document.getElementById("runCode");
+const secretIcon = document.createElement("i");
 
 // Initialize CodeMirror for syntax highlighting in the textarea
 const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -12,9 +13,10 @@ const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineWrapping: true,
 });
 
-// Load custom tags and modules from localStorage
+// Load custom tags, modules, and secrets from localStorage
 const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
 const eshModules = JSON.parse(localStorage.getItem("eshModules")) || {};
+const secrets = JSON.parse(localStorage.getItem("secrets")) || {};
 
 // Save custom tags to localStorage
 function saveCustomTags() {
@@ -25,6 +27,33 @@ function saveCustomTags() {
 function saveEshModules() {
   localStorage.setItem("eshModules", JSON.stringify(eshModules));
 }
+
+// Save secrets to localStorage
+function saveSecrets() {
+  localStorage.setItem("secrets", JSON.stringify(secrets));
+}
+
+// Add secrets icon
+secretIcon.className = "fa-solid fa-key";
+secretIcon.title = "Add Secret";
+document.body.appendChild(secretIcon); // Add the icon to the body (can customize location)
+
+// Handle Secrets Storage
+secretIcon.addEventListener("click", () => {
+  const secretName = prompt("Enter a secret name:");
+  if (secretName) {
+    const secretValue = prompt(`Enter the value for "${secretName}":`);
+    if (secretValue) {
+      secrets[secretName] = secretValue;
+      saveSecrets();
+      alert(`Secret "${secretName}" has been saved!`);
+    } else {
+      alert("No value provided. Secret not saved.");
+    }
+  } else {
+    alert("No name provided. Secret not saved.");
+  }
+});
 
 // Handle Image Upload
 imageUpload.addEventListener("change", (event) => {
