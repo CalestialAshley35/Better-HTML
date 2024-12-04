@@ -96,4 +96,82 @@ pre:hover {
 /* Animating hover effects */
 .editor:hover, .output:hover {
   animation: glow 1.5s infinite;
+}
+
+/* Button Styling */
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Button Hover Effect */
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #2575fc, #6a11cb); /* Reverse Gradient */
+}
+
+/* Button Focus Effect */
+button:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Button Active Effect */
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Small Button (for compact use cases) */
+button.small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Large Button (for calls to action) */
+button.large {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+
+/* Button Animation */
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Animated Button */
+button.animated:hover {
+  animation: buttonPulse 1.5s infinite;
+}
+
+/* Button with Icon */
+button.icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+}
+
+/* Button Icon Styling */
+button.icon i {
+  font-size: 18px;
+  color: #ffffff;
+    }
