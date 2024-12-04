@@ -1,0 +1,26 @@
+name: Greet Contributor
+
+on: 
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Post a Hello message
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REPO_NAME: "NestSocks"
+        run: |
+          echo "Hello @${PR_AUTHOR}! 👋 Thank you for contributing to ${REPO_NAME}. We're excited to review your changes!"
+          
+      - name: Post a comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Hello @${{ github.event.pull_request.user.login }}! 👋  
+            Thank you for contributing to **NestSocks**. 🚀  
+            We're thrilled to have you help improve this project! Your changes are under review.
