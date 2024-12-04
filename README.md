@@ -22,11 +22,26 @@ HTML++ is a markup language that extends HTML with extra features. The HTML++ ed
     <formElement type="text" name="username" placeholder="Enter Username"></formElement> <!-- Form elements -->
     <tableCreate rows="2" cols="3" border="2"></tableCreate>
     <embedContent type="youtube" url="https://youtube.com/watch?v=dQw4w9WgXcQ"></embedContent>
-    
-    ```
+    <highlight language="javascript">
+  const greet = (name) => {
+    console.log(`Hello, ${name}!`);
+  };
+  greet('World')
+    </highlight>``W
 
 ## Usage
 
 1. **Write Code**: Enter HTML++ or standard HTML.
 2. **Upload Image**: Upload and embed images.
 3. **Run Code**: Click "Run Code" to render the output.
+4. You can use Tags singly or multiply with others 
+
+## Package Manager 
+
+HTML++ have an Package Manager called esh (Extensibility Increases HTML) 
+to use it type "esh create <name> html:<enter standard html code here"
+
+Example:
+```esh create myCard html:<div class="card"><h2>Title</h2><p>Description goes here...</p></div>```
+
+You can use your module by "esh install myCard" or Your Module Name
