@@ -12,6 +12,9 @@
   <!-- Prism.js CSS (For syntax highlighting) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
+  <!-- Font Awesome CSS (For icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,6 +32,24 @@
   <div>
     <input type="file" id="imageUpload" accept="image/*">
     <p id="fileDetails">No file selected.</p>
+  </div>
+
+  <!-- Secret Name and Value Section -->
+  <div>
+    <i class="fa-solid fa-key" id="addSecretIcon" title="Add Secret"></i>
+  </div>
+
+  <!-- Modal for Secret Input -->
+  <div id="secretModal" class="hidden">
+    <div class="modal-content">
+      <h2>Add Secret</h2>
+      <label for="secretName">Secret Name:</label>
+      <input type="text" id="secretName" placeholder="Enter secret name">
+      <label for="secretValue">Secret Value:</label>
+      <input type="text" id="secretValue" placeholder="Enter secret value">
+      <button id="saveSecret">Save Secret</button>
+      <button id="closeModal">Close</button>
+    </div>
   </div>
 
   <!-- Code Editor Section -->
@@ -53,4 +74,4 @@
 
   <script src="scripts.js"></script>
 </body>
-  </html>
+</html>
