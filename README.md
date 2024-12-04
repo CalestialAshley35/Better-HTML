@@ -45,3 +45,8 @@ Example:
 ```esh create myCard html:<div class="card"><h2>Title</h2><p>Description goes here...</p></div>```
 
 You can use your module by "esh install myCard" or Your Module Name
+
+## Create Your Own Tag
+
+Type `<create>name="<tagname>" js:<type real HTML></create>`
+and then you can import by `<import><tag name></import>`
