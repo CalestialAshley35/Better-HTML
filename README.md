@@ -20,6 +20,9 @@ HTML++ is a markup language that extends HTML with extra features. The HTML++ ed
     <embedContent type="youtube" url="video-url"></embedContent> <!-- Embeds external content -->
     <codeBlock language="html" content="<div>Code</div>"></codeBlock> <!-- Code syntax highlighting -->
     <formElement type="text" name="username" placeholder="Enter Username"></formElement> <!-- Form elements -->
+    <tableCreate rows="2" cols="3" border="2"></tableCreate>
+    <embedContent type="youtube" url="https://youtube.com/watch?v=dQw4w9WgXcQ"></embedContent>
+    
     ```
 
 ## Usage
@@ -27,11 +30,3 @@ HTML++ is a markup language that extends HTML with extra features. The HTML++ ed
 1. **Write Code**: Enter HTML++ or standard HTML.
 2. **Upload Image**: Upload and embed images.
 3. **Run Code**: Click "Run Code" to render the output.
-
-## Example
-
-```html
-<fontStyle font="Arial" color="blue" size="20px">Styled Text</fontStyle>
-<tableCreate rows="2" cols="3" border="2"></tableCreate>
-<markdown>content="**Bold** and *Italic*"</markdown>
-<embedContent type="youtube" url="https://youtube.com/watch?v=dQw4w9WgXcQ"></embedContent>
