@@ -50,3 +50,8 @@ You can use your module by "esh install myCard" or Your Module Name
 
 Type `<create>name="<tagname>" js:<type real HTML></create>`
 and then you can import by `<import><tag name></import>`
+
+## Storage 
+a Database to store datas and load it anytime 🎉 : 
+- store data with "<storage>store="<type whatever your brain farted about>" to store and data securely 😏
+- load all datas wih `<dataload>` to load datas and see what you brain has farted.
