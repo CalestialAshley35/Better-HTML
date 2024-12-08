@@ -15,6 +15,7 @@ const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
 // Load custom tags and modules from localStorage
 const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
 const eshModules = JSON.parse(localStorage.getItem("eshModules")) || {};
+const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
 
 // Save custom tags to localStorage
 function saveCustomTags() {
@@ -24,6 +25,11 @@ function saveCustomTags() {
 // Save eshModules to localStorage
 function saveEshModules() {
   localStorage.setItem("eshModules", JSON.stringify(eshModules));
+}
+
+// Save stored data to localStorage
+function saveStoredData() {
+  localStorage.setItem("storedData", JSON.stringify(storedData));
 }
 
 // Handle Image Upload
@@ -78,7 +84,7 @@ runButton.addEventListener("click", () => {
 
   // New Command: esh create
   htmlCode = htmlCode.replace(
-    /esh create (\w+)\s*html:(.*?)$/gm,
+    /esh create (\w+)\s*html:(.*?)/gs,
     (match, moduleName, moduleHTML) => {
       eshModules[moduleName] = moduleHTML.trim();
       saveEshModules();
@@ -94,6 +100,28 @@ runButton.addEventListener("click", () => {
         eshModules[moduleName] ||
         `<p>Error: Module <strong>${moduleName}</strong> not found!</p>`
       );
+    }
+  );
+
+  // <storage>
+  htmlCode = htmlCode.replace(
+    /<storage>store="(.*?)"<\/storage>/g,
+    (match, data) => {
+      const key = `store_${Object.keys(storedData).length + 1}`;
+      storedData[key] = data;
+      saveStoredData();
+      return `<p>Data stored with key: <strong>${key}</strong></p>`;
+    }
+  );
+
+  // <dataload>
+  htmlCode = htmlCode.replace(
+    /<dataload><\/dataload>/g,
+    () => {
+      const storedItems = Object.entries(storedData)
+        .map(([key, value]) => `<p><strong>${key}</strong>: ${value}</p>`)
+        .join("");
+      return storedItems || `<p>No stored data found.</p>`;
     }
   );
 
