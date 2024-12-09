@@ -12,10 +12,10 @@ const codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineWrapping: true,
 });
 
-// Load custom tags and modules from localStorage
+// Load custom tags, modules, and stored data from localStorage
 const customTags = JSON.parse(localStorage.getItem("customTags")) || {};
 const eshModules = JSON.parse(localStorage.getItem("eshModules")) || {};
-const storedData = JSON.parse(localStorage.getItem("storedData")) || {};
+let storedData = JSON.parse(localStorage.getItem("storedData")) || {};
 
 // Save custom tags to localStorage
 function saveCustomTags() {
